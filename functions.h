@@ -1,3 +1,11 @@
+#define ZERO 0
+#define NO_VALUE -1
+#define ONE 1
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#include <string.h>
+#include <stdio.h>
 /* two struct for User and Posts */
 typedef struct Post
 {
@@ -21,7 +29,6 @@ typedef struct User
 
 } User;
 
-char *itoa(int num, char *buffer, int base);
 void login(User *main_user, User *head_user, Post *head_post);
 void signup(char *name2, char *name3, User *head_user);
 char *get_str();
@@ -46,5 +53,14 @@ void doInfo(User *main_user);
 void doNewPost(char *name2, char *name_secend, User *main_user, Post *head_post);
 void doFindUser(char *name2, User *head_user);
 void setLike(User *user);
-int getPostLength(Post *head_post);
-int getUserLength(User *head_user);
+int getAllPostLength(Post *head_post);
+int getAllUserLength(User *head_user);
+int getPostLength(User *head);
+int saveUsersToFile(FILE *file,User *head_user);
+int savePostToFile(FILE *file,Post *head_post);
+char* mallocSTRUresName(FILE* file);
+char* mallocSTRUresPass(FILE* file);
+int loadUsers(User *Head_user);
+char* mallocSTRName(FILE* file);
+int loadPost(Post *Head_post ,User* Head_user);
+User *searchUserByID(User *head, int user_id);

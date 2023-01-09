@@ -74,6 +74,7 @@ char *bradcast2(char *name)
     }
 }
 
+
 /* this function is for return secend part of input */
 char *secend_part_str(char *name)
 {
@@ -167,6 +168,7 @@ char *get_str()
     return name;
 }
 
+//for add new user
 void addUser(User *head, char *name, char *password)
 {
     User *temp, *p;
@@ -567,7 +569,7 @@ void doFindUser(char *name2, User *head_user)
         temp_user = searchUser(head_user, name2);
         if (temp_user != NULL)
         {
-            printf("\nUserName:%s\n\n",temp_user->User_Name);
+            printf("\nUserName:%s\n\n", temp_user->User_Name);
             showPosts(temp_user);
         }
         else
@@ -699,4 +701,227 @@ void setLike(User *user)
             }
         }
     }
+}
+
+//for save urers in file
+int saveUsersToFile(FILE *file,User *head_user){
+    User * utemp=head_user->next;
+    int userLength = getAllUserLength(head_user);
+
+    fprintf(file,"%d",userLength);
+    fputs("\n",file);
+    for (int i = 0; i < userLength; i++)
+    {
+        fprintf(file,"%s %s %d ",utemp->User_Name,utemp->User_Password,getPostLength(utemp));
+        fputs("\n",file);
+        utemp=utemp->next;
+    }
+    return 0;
+}
+
+//for save posts in file
+int savePostToFile(FILE *file,Post *head_post){
+    Post * temp=head_post->next;
+    int postLength = getAllPostLength(head_post);
+    fprintf(file,"%d",postLength);
+    fputs("\n",file);
+    for (int j = 0; j < postLength; j++)
+    {
+        fprintf(file,"%d %d %s",temp->User_ID,temp->Like_Number,temp->Post_Text);
+        // if (temp->Like_Number!=0){
+        //     fputs("\n",file);
+        //     for (int i = 0; i < temp->Like_Number; i++)
+        //     {
+        //         fprintf(file,"%d",temp->Users_Like[i]);
+                
+        //         fputs(" ",file);
+        //     }
+        //     fprintf(file,"0");
+        //     fputs("\n",file);
+            
+        // }else{
+        //     fputs("\n",file);
+        // }
+        fputs("\n",file);
+        temp=temp->next;
+    }
+    return 0;
+}
+
+//for get all post number
+int getAllPostLength(Post* head_post){
+    Post *temp=head_post->next;
+    if (temp == NULL)
+    {
+        return 0;
+    }else{
+        int i=0;
+        while (temp!=NULL)
+        {
+            temp=temp->next;
+            i++;
+        }
+        return i;
+        
+    }
+    
+}
+
+//it returns number of post that user have
+int getPostLength(User *user){
+    Post *temp=user->User_First_Post;
+    if (temp == NULL)
+    {
+        return 0;
+    }else{
+        int i=0;
+        while (temp!=NULL  )
+        {
+            if (temp->User_ID==user->User_id)
+            {
+                i++;
+            }
+            temp=temp->next;
+            
+        }
+        return i;
+        
+    }
+    
+}
+
+int getAllUserLength(User * head_user){
+    User *temp=head_user->next;
+    if (temp == NULL)
+    {
+        return 0;
+    }else{
+        int i=0;
+        while (temp!=NULL)
+        {
+            temp=temp->next;
+            i++;
+        }
+        return i;
+        
+    }
+}
+
+int loadUsers(User *Head_user){
+    FILE *file = fopen("UTtootiUser.txt","r");
+    int number , posts;
+    if (file==NULL || number==0)
+    {
+        return 0 ;
+    }
+    fscanf(file,"%d",&number);
+    
+    fscanf(file,"\n");
+
+    for (int i = 0; i < number; i++)
+    {
+        char * name1=mallocSTRUresName(file);
+        char * name2=mallocSTRUresName(file);
+        addUser(Head_user,name1,name2);
+        fscanf(file," ");
+        fscanf(file,"%d",&posts);
+        fscanf(file,"\n");
+    }
+    return 1;
+
+}
+
+char* mallocSTRUresName(FILE* file){
+    char *name;
+    char c;
+    int count = 0;
+    name = (char *)malloc(sizeof(char));
+    
+    while ((c = fgetc(file)) != ' ')
+    {
+        name[count] = (char)c;
+        count++;
+        name = (char *)realloc(name, (count + 0) * sizeof(char));
+    }
+    return name;
+}
+
+char* mallocSTRUresPass(FILE* file){
+    char *name;
+    char c;
+    int count = 0;
+    name = (char *)malloc(sizeof(char));
+    
+    while ((c = fgetc(file)) != ' ')
+    {
+        name[count] = (char)c;
+        count++;
+        name = (char *)realloc(name, (count + 0) * sizeof(char));
+    }
+    return name;
+}
+
+char* mallocSTRName(FILE* file){
+    char *name;
+    char c;
+    int count = 0;
+    name = (char *)malloc(sizeof(char));
+    
+    while ((c = fgetc(file)) != '\n' )
+    {
+        name[count] = (char)c;
+        count++;
+        name = (char *)realloc(name, (count + 0) * sizeof(char));
+    }
+    return name;
+}
+
+int loadPost(Post *Head_post ,User* Head_user){
+    FILE *file = fopen("UTtootiPost.txt","r");
+    Post *tempPost;
+    User *tempUser;
+    int number ,userID,likes ,tempUserID;
+    
+    if (file==NULL || number==0)
+    {
+        return 0 ;
+    }
+    fscanf(file,"%d",&number);
+    fscanf(file,"\n");
+    for (int i = 0; i < number; i++)
+    {
+        fscanf(file,"%d",&userID);
+        fscanf(file," ");
+        fscanf(file,"%d",&likes);
+        fscanf(file," ");
+        char * name1=mallocSTRName(file);
+        addPost(Head_post,name1,searchUserByID(Head_user,userID));
+        fscanf(file,"\n");
+    }
+    return 1;
+    
+    
+
+}
+
+User *searchUserByID(User *head, int user_id)
+{
+    User *temp;
+    if (head->next == NULL)
+    {
+        return NULL;
+    }
+    else
+    {
+        temp = head->next;
+        while (temp != NULL)
+        {
+            if (temp->User_id==user_id)
+            {
+                return temp;
+            }
+            temp = temp->next;
+        }
+    }
+    return NULL;
 }

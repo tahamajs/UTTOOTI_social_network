@@ -1,9 +1,11 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
 #include <string.h>
+#include <stdio.h>
 #include "functions.h"
-#define ZERO 0
-#define NO_VALUE -1
-#define ONE 1
+// #include "functions.h"
+
 
 int main()
 {
@@ -11,10 +13,25 @@ int main()
     Post *head_post = creatPost();
     char *name;
     char *name1, *name2, *name3, *name_secend;
+    FILE *usersFile ,*postFile;
     printf("Hello   ---   Wellcom to UTtooti \n");
+    if (loadUsers(head_user) != 0)
+    {
+        printf("Users are in database now . \n");
+    }else{
+        printf("We dont find any last user .\n");
+    }
+    if (loadPost(head_post,head_user) != 0)
+    {
+        printf("post are in database now . \n");
+    }else{
+        printf("We dont find any last post .\n");
+    }
+    
+    
     while (1)
     {
-        printf("What do you want to do ? -> login or signup ? \n");
+        printf("What do you want to do ? -> login or signup or exit ? \n");
         name = get_str();
         name1 = bradcast1(name);
         name2 = bradcast2(name);
@@ -53,6 +70,14 @@ int main()
             {
                 printf("Incorrect input !!!\n\n");
             }
+        }
+        else if (strcmp(name1, "exit") == ZERO)
+        {
+            usersFile = fopen("UTtootiUser.txt","w");
+            postFile = fopen("UTtootiPost.txt","w");
+            saveUsersToFile(usersFile,head_user);
+            savePostToFile(postFile,head_post);
+            exit(0);
         }
         else
         {
