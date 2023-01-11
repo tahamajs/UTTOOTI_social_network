@@ -65,7 +65,7 @@ void login(User *main_user, User *head_user, Post *head_post)
     }
 }
 
-// for signup you use this function
+// for signup 
 void signup(char *name2, char *name3, User *head_user)
 {
     User *temp_user;
