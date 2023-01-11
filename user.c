@@ -1,4 +1,5 @@
 #include "headers.h"
+
 //for add new user
 void addUser(User *head, char *name, char *password)
 {
