@@ -1,4 +1,6 @@
 #include "headers.h"
+
+//for create new node of linklist in posts
 Post *creatPost()
 {
     Post *temp;

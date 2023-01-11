@@ -1,4 +1,5 @@
 #include "headers.h"
+
 /* this function is dvide name to three names and return first part*/
 char *bradcast1(char *name)
 {
@@ -160,6 +161,7 @@ char *get_str()
     return name;
 }
 
+//this function allocate memmory for saving string from file
 char* mallocSTRUresName(FILE* file){
     char *name;
     char c;
@@ -175,6 +177,7 @@ char* mallocSTRUresName(FILE* file){
     return name;
 }
 
+//this function allocate memmory for saving string from file
 char* mallocSTRUresPass(FILE* file){
     char *name;
     char c;
@@ -190,6 +193,7 @@ char* mallocSTRUresPass(FILE* file){
     return name;
 }
 
+//this function allocate memmory for saving string from file
 char* mallocSTRName(FILE* file){
     char *name;
     char c;

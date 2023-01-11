@@ -35,6 +35,7 @@ void addUser(User *head, char *name, char *password)
     }
 }
 
+//for create new node of linklist in users
 User *creatUser()
 {
     User *temp;
@@ -104,6 +105,7 @@ User *deleteUser(User *head, char *name)
     return head;
 }
 
+//this function output all users length 
 int getAllUserLength(User * head_user){
     User *temp=head_user->next;
     if (temp == NULL)
@@ -121,6 +123,7 @@ int getAllUserLength(User * head_user){
     }
 }
 
+//this function can search users by id 
 User *searchUserByID(User *head, int user_id)
 {
     User *temp;

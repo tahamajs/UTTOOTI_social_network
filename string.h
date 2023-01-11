@@ -1,3 +1,5 @@
+//this functions are for working with strings like malloc 
+
 char* mallocSTRUresName(FILE* file);
 char* mallocSTRUresPass(FILE* file);
 char* mallocSTRName(FILE* file);

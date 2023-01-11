@@ -1,4 +1,6 @@
 #include "headers.h"
+
+//this function is for load users from file 
 int loadUsers(User *Head_user){
     FILE *file = fopen("UTtootiUser.txt","r");
     int number , posts;
@@ -22,6 +24,8 @@ int loadUsers(User *Head_user){
     return 1;
 
 }
+
+//this function is for load posts from file 
 int loadPost(Post *Head_post ,User* Head_user){
     FILE *file = fopen("UTtootiPost.txt","r");
     Post *tempPost;

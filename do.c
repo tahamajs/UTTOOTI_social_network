@@ -1,4 +1,5 @@
 #include "headers.h"
+
 // use this function for like posts
 void doLike(char *name2, char *name3, User *head_user, Post *head_post, User *main_user)
 {

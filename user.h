@@ -1,3 +1,5 @@
+//this functions are for work with user in programm
+
 int getAllUserLength(User *head_user);
 User *searchUserByID(User *head, int user_id);
 User *creatUser();

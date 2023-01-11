@@ -1,3 +1,5 @@
+//this functions are for working with posts
+
 Post *creatPost();
 void deletePost(Post *head, int id, User *user);
 Post *searchPost(Post *head, int id, User *user);
