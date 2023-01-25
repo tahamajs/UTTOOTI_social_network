@@ -41,6 +41,7 @@ int savePostToFile(FILE *file,Post *head_post){
         // }
         fputs("\n",file);
         temp=temp->next;
+        
     }
     return 0;
 }
