@@ -8,3 +8,4 @@
 #include "save.h"
 #include "do.h"
 #include "string.h"
+#include "free.h"

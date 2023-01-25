@@ -72,6 +72,8 @@ int main()
             postFile = fopen("UTtootiPost.txt","w");
             saveUsersToFile(usersFile,head_user);
             savePostToFile(postFile,head_post);
+            freePost(head_post);
+            freeUser(head_user);
             exit(0);
         }
         else
