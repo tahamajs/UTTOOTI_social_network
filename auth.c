@@ -7,7 +7,7 @@ void login(User *main_user, User *head_user, Post *head_post)
     char *name1, *name2, *name3, *name_secend;
     while (1)
     {
-
+ 
         printf("What do you want to do?   -> post  like  delete  info  finde_user  logout  ?\n ");
         name = get_str();
         name1 = bradcast1(name);
